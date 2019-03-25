@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/1846689910/countenance/issues"
   },
-  "homepage": "https://github.com/1846689910/countenance#readme"
+  "homepage": "https://github.com/1846689910/countenance#readme",
+  "devDependencies": {
+    "confi-coder": "^1.0.0"
+  }
 }
