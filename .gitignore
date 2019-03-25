@@ -1,3 +1,4 @@
 dist
 node_modules
 scripts/**
+src/repositories.js
