@@ -3,11 +3,11 @@ const Path = require("path");
 
 const getRepoToken = repoName => {
   const path = Path.resolve("lib", `${repoName}.ecd`);
-  if (!Fs.existsSync(path)) {
-    throw new Error(`${path} is not found`);
-  } else {
-    return Fs.readFileSync(path);
+  let repoToken;
+  if (Fs.existsSync(path)) {
+    repoToken = Fs.readFileSync(path);
   }
+  return repoToken;
 };
 
 module.exports = {
