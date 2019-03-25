@@ -19,6 +19,14 @@ const repoToken = getRepoToken("SELF_REPO_NAME");
 
 put encoded token file `REPO.txt.ecd` in `lib/`
 
-Either `encode(originalFilePath, tokenFilePath, key)` or `CODER_KEY=... npm run encode from=... to=...` within `confi-coder`
+Either
+```js
+encode(originalFilePath, tokenFilePath, key)
+```
+or within `confi-coder`
+
+```bash
+CODER_KEY=... npm run encode from=... to=...
+```
 
 ## update repo token
