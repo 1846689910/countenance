@@ -3,11 +3,11 @@ const Promise = require("bluebird");
 const { decode, encode } = require("confi-coder/src/coder");
 const exec = Promise.promisify(shell.exec);
 const Path = require("path");
+const repositories = require("./repositories");
 
 const { platform } = process;
 const sep = platform === "win32" ? "&" : ";";
 const workingBranch = "update";
-const repositories = {/* repo info object here */};
 
 async function main() {
   const repos = repositories && Object.entries(repositories);
@@ -43,4 +43,4 @@ function commands (...args){
   return args.join(` ${sep} `);
 }
 
-main();
+// main();
