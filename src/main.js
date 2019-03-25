@@ -43,4 +43,4 @@ function commands (...args){
   return args.join(` ${sep} `);
 }
 
-// main();
+main();
