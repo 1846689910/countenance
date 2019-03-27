@@ -8,6 +8,7 @@ const exec = Promise.promisify(shell.exec);
 const { platform } = process;
 const sep = platform === "win32" ? "&" : ";";
 const workingBranch = "update";
+const noPush = process.argv.find(x => x === "--np");
 
 async function main() {
   const repos = repositories && Object.entries(repositories);
@@ -15,12 +16,12 @@ async function main() {
     await newBranch();
     for (let i = 0, len = repos.length; i < len; i++) {
       const [k, repo] = repos[i];
-      const {name, code} = repo;
+      const { name, code } = repo;
       await decode(getEncodedPath(`${name}.ecd`), getDecodedPath(name), code.before);
       await encode(getDecodedPath(name), getEncodedPath(`${name}.ecd`), code.next);
       await track();
     }
-    await exec(`git push origin ${workingBranch}`);
+    if (!noPush) await exec(`git push origin ${workingBranch}`);
   }
 }
 
