@@ -27,7 +27,7 @@ async function main() {
       );
       await track();
     }
-    // await exec(`git push origin ${workingBranch}`);
+    await exec(`git push origin ${workingBranch}`);
   }
 }
 
