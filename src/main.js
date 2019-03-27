@@ -1,9 +1,9 @@
-const shell = require("shelljs");
 const Promise = require("bluebird");
 const { decode, encode } = require("confi-coder/src/coder");
-const exec = Promise.promisify(shell.exec);
-const Path = require("path");
 const repositories = require("./repositories");
+const { getDecodedPath, getEncodedPath } = require("./utils");
+const shell = require("shelljs");
+const exec = Promise.promisify(shell.exec);
 
 const { platform } = process;
 const sep = platform === "win32" ? "&" : ";";
@@ -14,17 +14,10 @@ async function main() {
   if (repos && repos.length > 0) {
     await newBranch();
     for (let i = 0, len = repos.length; i < len; i++) {
-      const [name, repo] = repos[i];
-      await decode(
-        Path.resolve("lib", `${name}.txt.ecd`),
-        Path.resolve("dist", `${name}.txt`),
-        repo.code.before
-      );
-      await encode(
-        Path.resolve("dist", `${name}.txt`),
-        Path.resolve("lib", `${name}.txt.ecd`),
-        repo.code.next
-      );
+      const [k, repo] = repos[i];
+      const {name, code} = repo;
+      await decode(getEncodedPath(`${name}.ecd`), getDecodedPath(name), code.before);
+      await encode(getDecodedPath(name), getEncodedPath(`${name}.ecd`), code.next);
       await track();
     }
     await exec(`git push origin ${workingBranch}`);
@@ -32,14 +25,14 @@ async function main() {
 }
 
 async function track() {
-  await exec(commands("git add .", `git commit -m "update"`))
+  await exec(commands("git add .", `git commit -m "update"`));
 }
 
 async function newBranch() {
   await exec(commands("git checkout master", `git checkout -b ${workingBranch}`));
 }
 
-function commands (...args){
+function commands(...args) {
   return args.join(` ${sep} `);
 }
 
