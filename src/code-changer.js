@@ -24,7 +24,7 @@ async function main() {
       await track();
     }
     if (!noPush) await exec(`git push origin ${workingBranch}`);
-    resetRepoCode();
+    resetRepoCode(freshCode);
   }
 }
 
