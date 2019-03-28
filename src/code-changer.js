@@ -2,7 +2,7 @@ const Promise = require("bluebird");
 const Fs = require("fs");
 const { decode, encode } = require("confi-coder/src/coder");
 const repositories = require("./repositories.json");
-const { getDecodedPath, getEncodedPath } = require("./utils");
+const { getDecodedPath, getEncodedPath, repoJsonPath } = require("./utils");
 const shell = require("shelljs");
 const exec = Promise.promisify(shell.exec);
 
@@ -47,10 +47,9 @@ async function getFreshCode(){
 
 async function resetRepoCode(fresh){
   for (const key in repositories) {
-    const repo = repositories[key];
-    repo.code = fresh;
+    repositories[key].code = fresh;
   }
-  Fs.writeFileSync("./repositories.json", JSON.stringify(repositories, null, 2));
+  Fs.writeFileSync(repoJsonPath, JSON.stringify(repositories, null, 2));
 }
 
 function commands(...args) {
@@ -58,3 +57,22 @@ function commands(...args) {
 }
 
 main();
+
+// Fs.writeFileSync(repoJsonPath, JSON.stringify({
+//   concise: {
+//     name: "concise.md",
+//     code: "abs"
+//   },
+//   "type-18": {
+//     name: "type-18.txt",
+//     code: "abs"
+//   },
+//   "type-18-ssr": {
+//     name: "type-18-ssr.txt",
+//     code: "abs"
+//   },
+//   schoolproject: {
+//     name: "schoolproject.txt",
+//     code: "abs"
+//   },
+// }, null, 2));
