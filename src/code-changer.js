@@ -57,22 +57,3 @@ function commands(...args) {
 }
 
 main();
-
-// Fs.writeFileSync(repoJsonPath, JSON.stringify({
-//   concise: {
-//     name: "concise.md",
-//     code: "abs"
-//   },
-//   "type-18": {
-//     name: "type-18.txt",
-//     code: "abs"
-//   },
-//   "type-18-ssr": {
-//     name: "type-18-ssr.txt",
-//     code: "abs"
-//   },
-//   schoolproject: {
-//     name: "schoolproject.txt",
-//     code: "abs"
-//   },
-// }, null, 2));
