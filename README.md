@@ -19,44 +19,45 @@ const repoToken = getRepoToken("SELF_REPO_NAME");
 ## clone project
 
 1. clone project to local
-2. create `src/repositories.js`:
+2. create `src/repositories.json`:
 
-```js
-const code = {
-  before: "you never know", // the old code used to generate the .ecd files
-  next: "I am not gonna tell you"  // the fresh code to encode the original files
-};
-module.exports = {
+```json
+{
+  "concise": {
+    "name": "concise.md",
+    "code": "confidential"
+  },
   "type-18": {
-    name: "type-18.txt",
-    code
+    "name": "type-18.txt",
+    "code": "confidential"
   },
   "type-18-ssr": {
-    name: "type-18-ssr.txt",
-    code
+    "name": "type-18-ssr.txt",
+    "code": "confidential"
   },
-  schoolproject: {
-    name: "schoolproject.txt",
-    code
-  },
-  concise: {
-    name: "concise.md",
-    code
+  "schoolproject": {
+    "name": "schoolproject.txt",
+    "code": "confidential"
   }
-};
+}
 ```
 
 3. run `node src/decode-handler.js`
 
+## edit original file
+
+1. edit original file `dist/xxx.*`
+2. run `node src/encode-handler.js`
+
 ## add new token file
 
 1. put original file in `dist/`
-2. update `src/repositories.js`, add this project
+2. update `src/repositories.json`, add this project
 
-```js
-NEW_PROJECT: {
-  name: "project.*",
-  code: { before, next }
+```json
+"NEW_PROJECT": {
+  "name": "project.*",
+  "code": "fresh code"
 }
 ```
 3. run `node src/encode-handler.js`
@@ -64,9 +65,9 @@ NEW_PROJECT: {
 ## change token code
 
 1. checkout a clean branch
-2. update `src/repositories.js`, put `next` code to `before` field, add a fresh `next` token. This token is used to generate encoded files this time
-3. change code by
+2. change code by
 ```bash
-node src/code-changer.js
-node src/code-changer.js --np # --np for no push
+node src/code-changer.js --code=mycode
+node src/code-changer.js --code=mycode --np # --np for no push
 ```
+3. save `src/repositories.json` in somewhere
