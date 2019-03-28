@@ -38,6 +38,10 @@ module.exports = {
   schoolproject: {
     name: "schoolproject.txt",
     code
+  },
+  concise: {
+    name: "concise.md",
+    code
   }
 };
 ```
