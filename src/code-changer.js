@@ -48,7 +48,7 @@ async function getFreshCode(){
 async function resetRepoCode(fresh){
   for (const key in repositories) {
     const repo = repositories[key];
-    repo.code.before = fresh;
+    repo.code = fresh;
   }
   Fs.writeFileSync("./repositories.json", JSON.stringify(repositories, null, 2));
 }
@@ -57,4 +57,4 @@ function commands(...args) {
   return args.join(` ${sep} `);
 }
 
-// main();
+main();
