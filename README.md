@@ -23,8 +23,8 @@ const repoToken = getRepoToken("SELF_REPO_NAME");
 
 ```js
 const code = {
-  before: "you never know",
-  next: "I am not gonna tell you"
+  before: "you never know", // the old code used to generate the .ecd files
+  next: "I am not gonna tell you"  // the fresh code to encode the original files
 };
 module.exports = {
   "type-18": {
@@ -57,53 +57,12 @@ NEW_PROJECT: {
 ```
 3. run `node src/encode-handler.js`
 
----
+## change token code
 
-## add repo token
-
-put encoded token file `REPO.txt.ecd` in `lib/`
-
-Either
-
-```js
-const { encode } = require("confi-coder/src/coder");
-encode(originalFilePath, tokenFilePath, key);
-```
-
-or within `confi-coder`
-
+1. checkout a clean branch
+2. update `src/repositories.js`, put `next` code to `before` field, add a fresh `next` token. This token is used to generate encoded files this time
+3. change code by
 ```bash
-CODER_KEY=... npm run encode from=... to=...
+node src/code-changer.js
+node src/code-changer.js --np # --np for no push
 ```
-
-Then update `repositories` object in `src/main.js`:
-
-put your `CODER_KEY` in `code.before`
-
-```js
-const repositories = {
-  "type-18": {
-    code: {
-      before: "def",
-      next: "xfa"
-    }
-  },
-  REPO_NAME: {
-    code: {
-      before: "def", // used for encoding last time, also for decoding first this time
-      next: "xfa" // fresh code used for encoding this time
-    }
-  }
-  // ...
-};
-```
-
-## update repo token
-
-- need to be at clean **`master`** branch
-- no branch **`update`** exists
-
-1. `node src/main.js`
-2. edit and update each token within `dist/`
-3. update object `repositories`, put `next` in `before`, then put fresh code in `next`
-4. `node src/main.js`
