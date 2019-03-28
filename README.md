@@ -15,6 +15,34 @@ const repoToken = getRepoToken("SELF_REPO_NAME");
     undefined: if token file not found
 */
 ```
+## clone project
+
+1. clone project to local
+2. create `src/repositories.js`:
+```js
+const code = {
+  before: "you never know",
+  next: "I am not gonna tell you"
+};
+module.exports = {
+  "type-18": {
+    name: "type-18.txt",
+    code
+  },
+  "type-18-ssr": {
+    name: "type-18-ssr.txt",
+    code
+  },
+  schoolproject: {
+    name: "schoolproject.txt",
+    code
+  }
+};
+```
+3. run `node src/decode-handler.js`
+
+---
+
 ## add repo token
 
 put encoded token file `REPO.txt.ecd` in `lib/`
