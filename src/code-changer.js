@@ -33,7 +33,7 @@ async function track() {
 }
 
 async function newBranch() {
-  await exec(commands("git checkout master", `git checkout -b ${workingBranch}`));
+  await exec(commands(`git checkout -b ${workingBranch}`));
 }
 
 async function getFreshCode(){
