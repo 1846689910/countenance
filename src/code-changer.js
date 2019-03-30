@@ -9,7 +9,7 @@ const exec = Promise.promisify(shell.exec);
 const { platform } = process;
 const sep = platform === "win32" ? "&" : ";";
 const workingBranch = "update";
-const noPush = process.argv.find(x => x === "--np");
+const noPush = process.argv.find(x => x === "--np" || x === "np");
 
 async function main() {
   const freshCode = await getFreshCode();
@@ -37,7 +37,7 @@ async function newBranch() {
 }
 
 async function getFreshCode(){
-  const arg = process.argv.find(x => x.includes("--code="));
+  const arg = process.argv.find(x => x.includes("--code=") || x.includes("code="));
   if (!arg) {
     throw new Error("fresh code is required use `node src/code-changer.js --code=FRESH_CODE`")
   } else {
