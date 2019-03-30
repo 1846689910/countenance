@@ -21,15 +21,15 @@ async function main() {
       const { name, code } = repo;
       await decode(getEncodedPath(`${name}.ecd`), getDecodedPath(name), code);
       await encode(getDecodedPath(name), getEncodedPath(`${name}.ecd`), freshCode);
-      await track();
+      await track(name);
     }
     if (!noPush) await exec(`git push origin ${workingBranch}`);
     resetRepoCode(freshCode);
   }
 }
 
-async function track() {
-  await exec(commands("git add .", `git commit -m "update"`));
+async function track(name) {
+  await exec(commands("git add .", `git commit -m "update token of ${name}"`));
 }
 
 async function newBranch() {
