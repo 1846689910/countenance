@@ -4,7 +4,10 @@
   "description": "repo token keeper",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "decode": "node src/decode-handler",
+    "encode": "node src/encode-handler",
+    "change": "node src/code-changer"
   },
   "repository": {
     "type": "git",
