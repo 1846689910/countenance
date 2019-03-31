@@ -21,6 +21,8 @@ const getEncodedPath1 = path => {
 
 const repoJsonPath = Path.resolve("src", "repositories.json");
 
+const tokenJsonPath = Path.resolve("src", "token.json");
+
 /**
  * @description given a directory, list all files within it
  * @param {*} dir: the directory that all files within it needs to be searched
@@ -57,6 +59,7 @@ module.exports = {
   getDecodedPath1,
   getEncodedPath1,
   repoJsonPath,
+  tokenJsonPath,
   getAllFilesInDir,
   getAllDirsOfFiles,
   mkDirs
