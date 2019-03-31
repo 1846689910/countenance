@@ -6,6 +6,19 @@ const getEncodedPath = name => Path.resolve("lib", name);
 
 const getDecodedPath = name => Path.resolve("dist", name);
 
+const getDecodedPath1 = path => {
+  let filename = Path.basename(path);
+  const dir = Path.dirname(path).split("/lib/")[1];
+  filename = filename.substring(0, filename.lastIndexOf(".ecd"));
+  return Path.resolve("dist", dir, filename);
+};
+
+const getEncodedPath1 = path => {
+  const filename = `${Path.basename(path)}.ecd`;
+  const dir = Path.dirname(path).split("/dist/")[1];
+  return Path.resolve("lib", dir, filename);
+};
+
 const repoJsonPath = Path.resolve("src", "repositories.json");
 
 /**
@@ -41,6 +54,8 @@ const mkDirs = dirs =>
 module.exports = {
   getEncodedPath,
   getDecodedPath,
+  getDecodedPath1,
+  getEncodedPath1,
   repoJsonPath,
   getAllFilesInDir,
   getAllDirsOfFiles,
