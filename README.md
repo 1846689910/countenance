@@ -19,48 +19,30 @@ const repoToken = getRepoToken("SELF_REPO_NAME");
 ## clone project
 
 1. clone project to local
-2. create `src/repositories.json`:
+2. create `src/token.json`:
 
 ```json
 {
-  "concise": {
-    "name": "concise.md",
-    "code": "confidential"
+  "general": {
+    "token": "GENERAL_TOKEN"
   },
-  "type-18": {
-    "name": "type-18.txt",
-    "code": "confidential"
-  },
-  "type-18-ssr": {
-    "name": "type-18-ssr.txt",
-    "code": "confidential"
-  },
-  "schoolproject": {
-    "name": "schoolproject.txt",
-    "code": "confidential"
+  "exception": {
+    "repo_name": "REPO_TOKEN"
   }
 }
 ```
 
-3. run `node src/decode-handler.js`
+3. `npm run decode`
 
 ## edit original file
 
-1. edit original file `dist/xxx.*`
-2. run `node src/encode-handler.js`
+1. edit original file `dist/**/xxx.*`
+2. `npm run encode`
 
 ## add new token file
 
 1. put original file in `dist/`
-2. update `src/repositories.json`, add this project
-
-```json
-"NEW_PROJECT": {
-  "name": "project.*",
-  "code": "fresh code"
-}
-```
-3. run `node src/encode-handler.js`
+2. `npm run encode`
 
 ## change token code
 
@@ -69,5 +51,6 @@ const repoToken = getRepoToken("SELF_REPO_NAME");
 ```bash
 node src/code-changer.js --code=mycode
 node src/code-changer.js --code=mycode --np # --np for no push
+npm run change code=mycode np
 ```
-3. save `src/repositories.json` in somewhere
+3. save `src/token.json` in somewhere
