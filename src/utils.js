@@ -5,7 +5,6 @@ const Fs = require("fs");
 const getDecodedPath = path => {
   let filename = Path.basename(path);
   const libDir = Path.resolve("lib");
-  // const dir = Path.dirname(path).split("/lib/")[1];
   const dir = Path.dirname(path).substring(libDir.length + 1);
   filename = filename.substring(0, filename.lastIndexOf(".ecd"));
   return Path.resolve("dist", dir, filename);
@@ -15,7 +14,6 @@ const getEncodedPath = path => {
   const filename = `${Path.basename(path)}.ecd`;
   const distDir = Path.resolve("dist");
   const dir = Path.dirname(path).substring(distDir.length + 1);
-  // const dir = Path.dirname(path).split("/dist/")[1];
   return Path.resolve("lib", dir, filename);
 };
 
