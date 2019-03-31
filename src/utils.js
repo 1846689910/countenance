@@ -2,24 +2,18 @@ const Path = require("path");
 const shell = require("shelljs");
 const Fs = require("fs");
 
-const getEncodedPath = name => Path.resolve("lib", name);
-
-const getDecodedPath = name => Path.resolve("dist", name);
-
-const getDecodedPath1 = path => {
+const getDecodedPath = path => {
   let filename = Path.basename(path);
   const dir = Path.dirname(path).split("/lib/")[1];
   filename = filename.substring(0, filename.lastIndexOf(".ecd"));
   return Path.resolve("dist", dir, filename);
 };
 
-const getEncodedPath1 = path => {
+const getEncodedPath = path => {
   const filename = `${Path.basename(path)}.ecd`;
   const dir = Path.dirname(path).split("/dist/")[1];
   return Path.resolve("lib", dir, filename);
 };
-
-const repoJsonPath = Path.resolve("src", "repositories.json");
 
 const tokenJsonPath = Path.resolve("src", "token.json");
 
@@ -54,11 +48,8 @@ const mkDirs = dirs =>
   dirs.filter(x => !Fs.existsSync(x)).forEach(x => Fs.mkdirSync(x, { recursive: true }));
 
 module.exports = {
-  getEncodedPath,
   getDecodedPath,
-  getDecodedPath1,
-  getEncodedPath1,
-  repoJsonPath,
+  getEncodedPath,
   tokenJsonPath,
   getAllFilesInDir,
   getAllDirsOfFiles,
