@@ -1,7 +1,6 @@
-const repositories = require("./repositories.json");
+const { general } = require("./token.json");
 const { decode } = require("confi-coder/src/coder");
-const { getDecodedPath, getEncodedPath } = require("./utils");
+const { getDecodedPath, getAllFilesInDir } = require("./utils");
 
-Object.entries(repositories).forEach(([k, repo]) =>
-  decode(getEncodedPath(`${repo.name}.ecd`), getDecodedPath(repo.name), repo.code)
-);
+const files = getAllFilesInDir("lib", true);
+files.forEach(f => decode(f, getDecodedPath(f), general.token));
