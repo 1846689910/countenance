@@ -49,11 +49,25 @@ const getAllDirsOfFiles = files => {
 const mkDirs = dirs =>
   dirs.filter(x => !Fs.existsSync(x)).forEach(x => Fs.mkdirSync(x, { recursive: true }));
 
+const generateCode = digits => {
+  const chars = [];
+  for (let i = 0; i < 10; i ++) chars.push(`${i}`); // numbers
+  for (let i = 0; i < 26; i ++) chars.push(...[String.fromCharCode(i + 97), String.fromCharCode(i + 65)]); // characters
+  chars.push(...["#", "@", "+", "-", "_", "%", "*"]);
+  const code = [];
+  for (let i = 0; i < digits; i ++) {
+    const idx = Math.floor(Math.random() * chars.length) + 1;
+    code.push(chars[idx]);
+  }
+  return code.join("");
+};
+
 module.exports = {
   getDecodedPath,
   getEncodedPath,
   tokenJsonPath,
   getAllFilesInDir,
   getAllDirsOfFiles,
-  mkDirs
+  mkDirs,
+  generateCode
 };

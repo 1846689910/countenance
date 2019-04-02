@@ -3,7 +3,7 @@ const Path = require("path");
 const Fs = require("fs");
 const { decode, encode } = require("confi-coder/src/coder");
 const { general } = require("./token.json");
-const { getAllFilesInDir, getDecodedPath, tokenJsonPath } = require("./utils");
+const { getAllFilesInDir, getDecodedPath, tokenJsonPath, generateCode } = require("./utils");
 const shell = require("shelljs");
 const exec = Promise.promisify(shell.exec);
 
@@ -39,7 +39,7 @@ async function newBranch() {
 async function getFreshCode() {
   const arg = process.argv.find(x => x.includes("--code=") || x.includes("code="));
   if (!arg) {
-    throw new Error("fresh code is required use `node src/code-changer.js --code=FRESH_CODE`");
+    return generateCode(8);
   } else {
     return arg.split("=")[1];
   }
