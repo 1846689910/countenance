@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "decode": "node src/decode-handler",
     "encode": "node src/encode-handler",
-    "change": "node src/code-changer"
+    "change": "node src/code-changer",
+    "auto-encode": "node src/auto-encoder"
   },
   "repository": {
     "type": "git",
