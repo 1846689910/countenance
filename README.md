@@ -54,3 +54,12 @@ node src/code-changer.js --code=mycode --np # --np for no push
 npm run change code=mycode np
 ```
 3. save `src/token.json` in somewhere
+
+## auto encode
+
+encode your content automatically
+
+```bash
+npm run auto-encode
+npm run auto-encode int=60000 # int for interval
+```
