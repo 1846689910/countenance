@@ -15,7 +15,7 @@ function autoEncode() {
     } else {
       encode();
     }
-    console.log(`${FgMagenta}${Bright}-- auto-encoded by ${getTimeString()} --${Reset}`);
+    setTimeout(console.log, 1500, `${FgMagenta}${Bright}-- auto-encoded by ${getTimeString()} --${Reset}`);
   }, interval);
 }
 autoEncode();
