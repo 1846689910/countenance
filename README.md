@@ -52,6 +52,7 @@ const repoToken = getRepoToken("SELF_REPO_NAME");
 node src/code-changer.js --code=mycode
 node src/code-changer.js --code=mycode --np # --np for no push
 npm run change code=mycode np
+npm run change # will generate and apply a new code
 ```
 3. save `src/token.json` in somewhere
 
