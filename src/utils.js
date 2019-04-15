@@ -19,10 +19,12 @@ const getEncodedPath = path => {
 
 const tokenJsonPath = Path.resolve("src", "token.json");
 
+const publicTokenJsonPath = Path.resolve("src", "public-token.json");
+
 /**
  * @description given a directory, list all files within it
- * @param {*} dir: the directory that all files within it needs to be searched
- * @param {*} recursive: do recursive search, default value: false
+ * @param {string} dir: the directory that all files within it needs to be searched
+ * @param {boolean} recursive: do recursive search, default value: false
  */
 const getAllFilesInDir = (dir, recursive = false) => {
   const args = recursive ? ["-R", Path.resolve(dir)] : [Path.resolve(dir)];
@@ -34,7 +36,7 @@ const getAllFilesInDir = (dir, recursive = false) => {
 
 /**
  * get all the files directory
- * @param {*} files: array of file paths
+ * @param {array} files: array of file paths
  */
 const getAllDirsOfFiles = files => {
   const set = new Set();
@@ -44,7 +46,7 @@ const getAllDirsOfFiles = files => {
 
 /**
  * recursive generate all non-existing directories
- * @param {*} dirs: all dirs needed
+ * @param {string} dirs: all dirs needed
  */
 const mkDirs = dirs =>
   dirs.filter(x => !Fs.existsSync(x)).forEach(x => Fs.mkdirSync(x, { recursive: true }));
@@ -67,13 +69,25 @@ const getTimeString = () => {
   return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
 }
 
+/**
+ * split token into two parts [publicToken, secretToken]
+ * `publicToken` will be stored in `public-token.json`, while the `secretToken` will be stored in `token.json`
+ * @param {string} token: the integral token
+ */
+const getTokenPairs = token => {
+  const mid = token.length / 2;
+  return [token.substring(0, mid), token.substring(mid)];
+};
+
 module.exports = {
   getDecodedPath,
   getEncodedPath,
+  publicTokenJsonPath,
   tokenJsonPath,
   getAllFilesInDir,
   getAllDirsOfFiles,
   mkDirs,
   generateCode,
-  getTimeString
+  getTimeString,
+  getTokenPairs
 };
