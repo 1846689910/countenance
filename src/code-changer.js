@@ -2,7 +2,8 @@ const Promise = require("bluebird");
 const Path = require("path");
 const Fs = require("fs");
 const { decode, encode } = require("confi-coder/src/coder");
-const { general } = require("./token.json");
+const { general: secretPart } = require("./token.json");
+const { general: publicPart } = require("./public-token.json");
 const {
   getAllFilesInDir,
   getDecodedPath,
@@ -26,7 +27,7 @@ async function main() {
     await newBranch();
     for (let i = 0, len = files.length; i < len; i++) {
       const decodedPath = getDecodedPath(files[i]);
-      await decode(files[i], decodedPath, general.token);
+      await decode(files[i], decodedPath, `${publicPart.token}${secretPart.token}`);
       await encode(decodedPath, files[i], freshCode);
       await track(Path.basename(files[i]));
     }
