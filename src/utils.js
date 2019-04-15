@@ -74,10 +74,7 @@ const getTimeString = () => {
  * `publicToken` will be stored in `public-token.json`, while the `secretToken` will be stored in `token.json`
  * @param {string} token: the integral token
  */
-const getTokenPairs = token => {
-  const mid = token.length / 2;
-  return [token.substring(0, mid), token.substring(mid)];
-};
+const getTokenPairs = token => [token.substring(0, 10), token.substring(10)];
 
 module.exports = {
   getDecodedPath,
