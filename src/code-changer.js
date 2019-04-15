@@ -31,7 +31,6 @@ async function main() {
       await encode(decodedPath, files[i], freshCode);
       await track(Path.basename(files[i]));
     }
-    if (!noPush) await exec(`git push origin ${workingBranch}`);
     resetRepoCode(freshCode);
   }
 }
@@ -60,6 +59,8 @@ async function resetRepoCode(fresh) {
   publicTokenJson.general.token = publicToken;
   tokenJson.general.token = secretToken;
   Fs.writeFileSync(publicTokenJsonPath, JSON.stringify(publicTokenJson, null, 2));
+  track("public-token.json");
+  if (!noPush) await exec(`git push origin ${workingBranch}`);
   Fs.writeFileSync(tokenJsonPath, JSON.stringify(tokenJson, null, 2));
 }
 
