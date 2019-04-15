@@ -3,7 +3,14 @@ const Path = require("path");
 const Fs = require("fs");
 const { decode, encode } = require("confi-coder/src/coder");
 const { general } = require("./token.json");
-const { getAllFilesInDir, getDecodedPath, tokenJsonPath, generateCode } = require("./utils");
+const {
+  getAllFilesInDir,
+  getDecodedPath,
+  tokenJsonPath,
+  publicTokenJsonPath,
+  generateCode,
+  getTokenPairs
+} = require("./utils");
 const shell = require("shelljs");
 const exec = Promise.promisify(shell.exec);
 
@@ -46,8 +53,12 @@ async function getFreshCode() {
 }
 
 async function resetRepoCode(fresh) {
+  const publicTokenJson = require("./public-token.json");
   const tokenJson = require("./token.json");
-  tokenJson.general.token = fresh;
+  const [publicToken, secretToken] = getTokenPairs(fresh);
+  publicTokenJson.general.token = publicToken;
+  tokenJson.general.token = secretToken;
+  Fs.writeFileSync(publicTokenJsonPath, JSON.stringify(publicTokenJson, null, 2));
   Fs.writeFileSync(tokenJsonPath, JSON.stringify(tokenJson, null, 2));
 }
 
